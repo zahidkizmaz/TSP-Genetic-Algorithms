@@ -44,7 +44,8 @@ for k=1:popSize;
     [parent2X,parent2Y] = find(totalDistances==parent2,1, 'first');
     parent2Path = pop(parent2X(1,1),:);
     
-    childPath = crossover(parent1Path, parent2Path);
+    childPath = crossover(parent1Path, parent2Path, 0.8);
+    childPath = mutate(childPath, 0.05);
     
     nextGeneration(k,:) = childPath(1,:);
 end
