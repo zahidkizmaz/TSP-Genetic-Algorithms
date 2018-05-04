@@ -8,7 +8,7 @@ popSize = input(prompt);
 tic
 
 % Generation cities on random locations.
-cities = rand(2,numberOfCities) * 10;
+cities = generateCities(numberOfCities, 10);
 
 % Calculating distances between cities according to created city locations.
 distances = calculateDistance(cities);
