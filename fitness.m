@@ -1,4 +1,4 @@
-function [ fitnessValues ] = fitness( distances, pop )
+function [ fitnessValues, pathTotalDistances,minPath, maxPath ] = fitness( distances, pop )
 %UNTÝTLED Summary of this function goes here
 %   Detailed explanation goes here
     [popSize, col] = size(pop);
