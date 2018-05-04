@@ -22,14 +22,15 @@ nextGeneration = zeros(popSize,numberOfCities);
 % Setting values for genetic algorithm.
 generationNumber = 2500;
 crossoverProbabilty = 0.6;
-mutationProbabilty = 0.4;
+mutationProbabilty = 0.3;
 
 for  gN=1:generationNumber;
 
     % Calculate fitnesses for the pathes total distances.
     [fitnessValues, totalDistances, minPath, maxPath] = fitness(distances, pop);
 
-    tournamentSize = int32(popSize *0.5);
+    %tournamentSize = int32(popSize *0.2);
+    tournamentSize=10;
     for k=1:popSize;
         % Choosing parents for crossover operation bu using tournament approach.
         tournamentPopDistances=zeros( tournamentSize,1);

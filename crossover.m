@@ -29,7 +29,8 @@ function [ childPath ] = crossover( parent1Path, parent2Path, prob )
         end
     else
         [l, length] = size(parent1Path);
-        childPath = generateIndividual(length);
+        %childPath = generateIndividual(length);
+        childPath = parent1Path;
     end
 end
 
