@@ -15,39 +15,47 @@ distances = calculateDistance(cities);
 
 % Generate population with random pathes.
 pop = population(numberOfCities, popSize);
-
 nextGeneration = zeros(popSize,numberOfCities);
 
-% Calculate fitnesses for the pathes total distances.
-[fitnessValues, totalDistances, minPath, maxPath] = fitness(distances, pop);
+% Setting values for genetic algorithm.
+generationNumber = 100;
+crossoverProbabilty = 0.8;
+mutationProbabilty = 0.05;
 
-tournamentSize = int32(popSize *0.1);
-for k=1:popSize;
-    % Choosing parents for crossover operation bu using tournament approach.
-    tournamentPopDistances=zeros( tournamentSize,1);
-    for i=1:tournamentSize;
-        randomRow = randi(popSize);
-        tournamentPopDistances(i,1) = totalDistances(randomRow,1);
+for  gN=0:generationNumber;
+
+    % Calculate fitnesses for the pathes total distances.
+    [fitnessValues, totalDistances, minPath, maxPath] = fitness(distances, pop);
+
+    tournamentSize = int32(popSize *0.1);
+    for k=1:popSize;
+        % Choosing parents for crossover operation bu using tournament approach.
+        tournamentPopDistances=zeros( tournamentSize,1);
+        for i=1:tournamentSize;
+            randomRow = randi(popSize);
+            tournamentPopDistances(i,1) = totalDistances(randomRow,1);
+        end
+
+        parent1  = min(tournamentPopDistances);
+        [parent1X,parent1Y] = find(totalDistances==parent1,1, 'first');
+        parent1Path = pop(parent1X(1,1),:);
+
+
+        for i=1:tournamentSize;
+            randomRow = randi(popSize);
+            tournamentPopDistances(i,1) = totalDistances(randomRow,1);
+        end
+
+        parent2  = min(tournamentPopDistances);
+        [parent2X,parent2Y] = find(totalDistances==parent2,1, 'first');
+        parent2Path = pop(parent2X(1,1),:);
+
+        childPath = crossover(parent1Path, parent2Path, crossoverProbabilty);
+        childPath = mutate(childPath, mutationProbabilty);
+
+        nextGeneration(k,:) = childPath(1,:);
     end
-
-    parent1  = min(tournamentPopDistances);
-    [parent1X,parent1Y] = find(totalDistances==parent1,1, 'first');
-    parent1Path = pop(parent1X(1,1),:);
-
-
-    for i=1:tournamentSize;
-        randomRow = randi(popSize);
-        tournamentPopDistances(i,1) = totalDistances(randomRow,1);
-    end
-
-    parent2  = min(tournamentPopDistances);
-    [parent2X,parent2Y] = find(totalDistances==parent2,1, 'first');
-    parent2Path = pop(parent2X(1,1),:);
-    
-    childPath = crossover(parent1Path, parent2Path, 0.8);
-    childPath = mutate(childPath, 0.05);
-    
-    nextGeneration(k,:) = childPath(1,:);
+    fprintf('Minimum path in %d. generation: %f. \n', gN,minPath);
+    pop = nextGeneration;
 end
-timeElapsed = toc
-
+toc

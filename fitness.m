@@ -6,7 +6,7 @@ function [ fitnessValues, pathTotalDistances,minPath, maxPath ] = fitness( dista
     fitnessValues = zeros(popSize,1);
     for i=1:popSize;
        for j=1:col-1;
-          pathTotalDistances(i) = pathTotalDistances(i) + distances(pop(i,j),pop(i,j+1))
+          pathTotalDistances(i) = pathTotalDistances(i) + distances(pop(i,j),pop(i,j+1));
        end 
     end
     minPath = min(pathTotalDistances);
