@@ -7,6 +7,8 @@ prompt = 'What is the number of population size? ';
 popSize = input(prompt);
 tic
 
+bestPathSoFar = Inf; 
+
 % Generation cities on random locations.
 cities = generateCities(numberOfCities, 10);
 
@@ -18,16 +20,16 @@ pop = population(numberOfCities, popSize);
 nextGeneration = zeros(popSize,numberOfCities);
 
 % Setting values for genetic algorithm.
-generationNumber = 100;
-crossoverProbabilty = 0.8;
-mutationProbabilty = 0.05;
+generationNumber = 2500;
+crossoverProbabilty = 0.6;
+mutationProbabilty = 0.4;
 
-for  gN=0:generationNumber;
+for  gN=1:generationNumber;
 
     % Calculate fitnesses for the pathes total distances.
     [fitnessValues, totalDistances, minPath, maxPath] = fitness(distances, pop);
 
-    tournamentSize = int32(popSize *0.1);
+    tournamentSize = int32(popSize *0.5);
     for k=1:popSize;
         % Choosing parents for crossover operation bu using tournament approach.
         tournamentPopDistances=zeros( tournamentSize,1);
@@ -57,5 +59,10 @@ for  gN=0:generationNumber;
     end
     fprintf('Minimum path in %d. generation: %f. \n', gN,minPath);
     pop = nextGeneration;
+    if minPath < bestPathSoFar;
+        bestPathSoFar = minPath;
+        visualizeGeneration(cities, pop, bestPathSoFar, totalDistances);
+    end
+    
 end
 toc
