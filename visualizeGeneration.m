@@ -1,7 +1,7 @@
 function [ output_args ] = visualizeGeneration( cities, pop, minPath, totalDistances )
 %Visualizing the cities and the best finded result according to algorithm.
  
-    
+    global gNumber;
     [l, length] = size(cities);
     xDots = cities(1,:);
     yDots = cities(2,:);
@@ -25,6 +25,8 @@ title('Genetic Algorithms for TSP');
     legend('Cities', 'Path');
     axis equal
     grid on
+    text(-40,99,sprintf('Generation number that path was found: %d Total path distance: %f',gNumber, minPath),'FontSize',10);
+    drawnow
     hold off
 end
 

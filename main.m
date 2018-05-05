@@ -2,6 +2,7 @@ clear;
 clc;
 %prompt = 'What is the number of cities in this TSP program? ';
 %numberOfCities = input(prompt);
+global gNumber;
 numberOfCities = 80;
 prompt = 'What is the number of population size? ';
 popSize = input(prompt);
@@ -22,7 +23,7 @@ nextGeneration = zeros(popSize,numberOfCities);
 % Setting values for genetic algorithm.
 generationNumber = 400;
 crossoverProbabilty = 0.6;
-mutationProbabilty = 0.5;
+mutationProbabilty = 0.05;
 
 % Genetic algorithm itself.
 for  gN=1:generationNumber;
@@ -62,6 +63,7 @@ for  gN=1:generationNumber;
     end
     fprintf('Minimum path in %d. generation: %f. \n', gN,minPath);
     
+    gNumber = gN;
     % Assigning the created generation the current population.
     pop = nextGeneration;
     
