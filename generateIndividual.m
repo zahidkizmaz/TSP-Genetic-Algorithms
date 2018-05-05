@@ -1,6 +1,5 @@
 function [ path ] = generateIndividual( lengthOfRoad )
-%UNTÝTLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%generateIndividual Generates a random path.
 
 path = randperm(lengthOfRoad);
 

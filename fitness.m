@@ -1,6 +1,7 @@
 function [ fitnessValues, pathTotalDistances,minPath, maxPath ] = fitness( distances, pop )
-%UNTÝTLED Summary of this function goes here
-%   Detailed explanation goes here
+%fitness Calculates the fitness value of whole population. Returns values
+%of fitnessValues, totalDistances, minPath and maxPath.
+
     [popSize, col] = size(pop);
     pathTotalDistances = zeros(popSize,1);
     fitnessValues = zeros(popSize,1);

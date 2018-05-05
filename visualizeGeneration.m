@@ -1,14 +1,16 @@
 function [ output_args ] = visualizeGeneration( cities, pop, minPath, totalDistances )
-%UNTÝTLED Summary of this function goes here
-%   Detailed explanation goes here
+%Visualizing the cities and the best finded result according to algorithm.
+ 
     
     [l, length] = size(cities);
     xDots = cities(1,:);
     yDots = cities(2,:);
-    figure(1);
-    
+    %figure(1);
     title('Genetic Algorithms for TSP');
-    plot(xDots,yDots, 'o');
+    plot(xDots,yDots, 'o', 'MarkerSize', 7.5, 'MarkerFaceColor', 'blue');
+    xlabel('X Dimension');
+    ylabel('Y Dimension');
+    axis equal
     hold on
     [minPathX,minPathY] = find(totalDistances==minPath,1, 'first');
     bestPopPath = pop(minPathX, :);
@@ -18,8 +20,10 @@ function [ output_args ] = visualizeGeneration( cities, pop, minPath, totalDista
        bestX(1,j) = cities(1,bestPopPath(1,j));
        bestY(1,j) = cities(2,bestPopPath(1,j));
     end
-
-    plot(bestX(1,:),bestY(1,:), 'red');
+title('Genetic Algorithms for TSP');
+    plot(bestX(1,:),bestY(1,:), 'red', 'LineWidth', 1.25);
+    legend('Cities', 'Path');
+    axis equal
     grid on
     hold off
 end

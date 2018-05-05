@@ -1,6 +1,6 @@
 function [ pop ] = population( numberOfCities, popSize )
-%UNTÝTLED5 Summary of this function goes here
-%   Detailed explanation goes here
+%population Generates a population sized of given popSize number.  
+
 
     pop = zeros(popSize, numberOfCities);
     for i=1:popSize;

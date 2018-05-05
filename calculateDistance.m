@@ -1,6 +1,6 @@
 function [ distances ] = calculateDistance( cities )
-%UNTÝTLED Summary of this function goes here
-%   Detailed explanation goes here
+%calculateDistance Generates the distances matrix of given cities.
+
     [row, col] = size(cities);
     distances = zeros(col);
 

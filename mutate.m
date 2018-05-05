@@ -1,6 +1,6 @@
 function [ mutatedPath ] = mutate( path, prob )
-%UNTÝTLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%mutate Mutates the giving path by givin probabilty.
+
     random = rand();
     if random <= prob; 
         [l,length] = size(path);
