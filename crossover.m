@@ -2,7 +2,7 @@ function [ childPath ] = crossover( parent1Path, parent2Path, prob )
 % Generating child path from given two parent pathes by using ordered one
 % crossover method.
     random = rand();
-    if prob <= random;
+    if prob >= random;
         [l, length] = size(parent1Path);
         childPath = zeros(l,length);
         setSize = int8(length/2) -1;

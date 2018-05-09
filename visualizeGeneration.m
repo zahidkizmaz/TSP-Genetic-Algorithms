@@ -25,7 +25,7 @@ title('Genetic Algorithms for TSP');
     legend('Cities', 'Path');
     axis equal
     grid on
-    text(-40,99,sprintf('Generation number that path was found: %d Total path distance: %f',gNumber, minPath),'FontSize',10);
+    text(-40,99,sprintf('Generation number this path was found: %d Total path distance: %.2f',gNumber, minPath),'FontSize',10);
     drawnow
     hold off
 end
