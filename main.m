@@ -6,7 +6,7 @@ global gNumber;
 numberOfCities = 80;
 prompt = 'What is the number of population size? ';
 popSize = input(prompt);
-tic
+tStart = tic;
 
 bestPathSoFar = Inf; 
 
@@ -21,9 +21,12 @@ pop = population(numberOfCities, popSize);
 nextGeneration = zeros(popSize,numberOfCities);
 
 % Setting values for genetic algorithm.
-generationNumber = 2500;
+generationNumber = 500;
 crossoverProbabilty = 0.9;
 mutationProbabilty = 0.05;
+
+%Keeping track of minimum pathes through every iteration.
+minPathes = zeros(generationNumber,1);
 
 % Genetic algorithm itself.
 for  gN=1:generationNumber;
@@ -60,6 +63,8 @@ for  gN=1:generationNumber;
         childPath = mutate(childPath, mutationProbabilty);
 
         nextGeneration(k,:) = childPath(1,:);
+        
+        minPathes(gN,1) = minPath; 
     end
     fprintf('Minimum path in %d. generation: %f. \n', gN,minPath);
     
@@ -72,6 +77,12 @@ for  gN=1:generationNumber;
         bestPathSoFar = minPath;
         visualizeGeneration(cities, pop, bestPathSoFar, totalDistances);
     end
-    
+
 end
-timeElapsed = toc
+plot(minPathes, 'MarkerFaceColor', 'blue','LineWidth',2);
+title('Minimum Path Length Each Generation');
+xlabel('Path Length');
+ylabel('Generation Number');
+grid on
+tEnd = toc(tStart);
+fprintf('Elapsed time:%d minutes and %f seconds\n', floor(tEnd/60), rem(tEnd,60));
