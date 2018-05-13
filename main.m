@@ -66,7 +66,7 @@ for  gN=1:generationNumber;
         
         minPathes(gN,1) = minPath; 
     end
-    fprintf('Minimum path in %d. generation: %f. \n', gN,minPath);
+    fprintf('Minimum path in %d. generation: %f \n', gN,minPath);
     
     gNumber = gN;
     % Assigning the created generation the current population.
@@ -79,10 +79,12 @@ for  gN=1:generationNumber;
     end
 
 end
+figure 
 plot(minPathes, 'MarkerFaceColor', 'blue','LineWidth',2);
-title('Minimum Path Length Each Generation');
-xlabel('Path Length');
-ylabel('Generation Number');
+title('Minimum Path Length for Each Generation');
+set(gca,'ytick',500:100:5000); 
+ylabel('Path Length');
+xlabel('Generation Number');
 grid on
 tEnd = toc(tStart);
-fprintf('Elapsed time:%d minutes and %f seconds\n', floor(tEnd/60), rem(tEnd,60));
+fprintf('Elapsed time:%d minutes and %f seconds.\n', floor(tEnd/60), rem(tEnd,60));
